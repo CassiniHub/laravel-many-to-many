@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources([
+    'locations' => 'LocationController',
+    'employees' => 'EmployeeController',
+    'tasks'     => 'TaskController',
+]);
