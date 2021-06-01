@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Employee;
+use App\Task;
+
 class TaskSeeder extends Seeder
 {
     /**
@@ -11,6 +14,13 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Task::class, 500) -> create()
+            -> each(function($task){
+            $employee = Employee::inRandomOrder()
+                        -> limit(rand(2, 5))
+                        -> get();
+            $task -> employees() -> attach($employee);
+            $task -> save();
+        });
     }
 }
